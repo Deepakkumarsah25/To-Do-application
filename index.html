@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App</title>
+    <style>
+        /* General Reset and Body Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #main {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        /* Input Field and Button Styling */
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin-left: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* To-Do List Styling */
+        ol {
+            list-style-type: decimal;
+            margin-top: 20px;
+        }
+
+        ol li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #fafafa;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        ol li button {
+            background-color: #f44336;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        ol li button:hover {
+            background-color: #e53935;
+        }
+
+        ol li button:nth-child(2) {
+            background-color: #ff9800;
+        }
+
+        ol li button:nth-child(2):hover {
+            background-color: #fb8c00;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            #main {
+                padding: 20px;
+            }
+
+            input[type="text"] {
+                padding: 10px;
+            }
+
+            button {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+
+            ol li {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <h1 style="font-weight: 900px;">To-Do List</h1>
+        <div>
+            <input type="text" id="inter" placeholder="Enter Student Name" autocomplete="off" >
+            <button type="button" id="addmember">Add Task</button>
+            <ol id="addlist"></ol>
+        </div>
+    </div>
+    
+
+    <script>
+        let input_inter = document.getElementById("inter");
+        let input_member_list_buttom = document.getElementById("addmember");
+        let input_member_list = document.getElementById("addlist");
+
+         main_call_function=()=> {
+            let create = document.createElement("li");
+            let button = document.createElement("button");
+            let update = document.createElement("button");
+
+            if (input_inter.value.trim() !== "") {
+                create.innerHTML = input_inter.value;
+                button.innerHTML = "Remove";
+                update.innerHTML = "Update";
+                create.appendChild(button);
+                create.appendChild(update);
+                input_member_list.appendChild(create);
+                input_inter.value = "";
+
+                // Button functionality to remove the task
+                button.addEventListener("click", () => {
+                    input_member_list.removeChild(create);
+                });
+
+                update.addEventListener("click", () => {
+                    let newTask = prompt("Enter Correct Name:", create.innerHTML);
+                    if (newTask !== null && newTask.trim() !== "") {
+                        create.innerHTML = newTask;
+                        create.appendChild(button);
+                        create.appendChild(update);
+                    }
+                })
+
+            }
+             else {
+                alert("Please enter a task");
+            }
+        }
+
+        input_member_list_buttom.addEventListener("click", main_call_function);
+    </script>
+</body>
+
+</html>
